@@ -1,8 +1,13 @@
-const PORT = process.env.port || 3000;
-const https = require('https');
-const express = require('express');
-const app = express();
 
+
+const https = require('https');
+const mongoose = require('mongoose');
+const express = require('express');
+const cors = require('cors');
+
+const app = express();
+app.use('/api',express.json());
+app.use('/api',cors());
 
 app.get('/api',(req,res) =>{
     res.contentType('text/plain');
