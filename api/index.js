@@ -8,9 +8,9 @@ app.get('/api',(req,res) =>{
     res.contentType('text/plain');
     res.send('hola mundo!');
 })
-
-https.createServer(app)
-.listen(PORT,() => {
-    console.log(`online! \nlistemport: ${PORT}`);
-});
+module.exports = app;
+// https.createServer(app)
+// .listen(PORT,() => {
+//     console.log(`online! \nlistemport: ${PORT}`);
+// });
 
