@@ -4,7 +4,7 @@ const express = require('express');
 const app = express();
 
 
-app.get('/',(req,res) =>{
+app.get('/api',(req,res) =>{
     res.contentType('text/plain');
     res.send('hola mundo!');
 })
