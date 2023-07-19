@@ -1,6 +1,4 @@
-
-
-const https = require('https');
+//const https = require('https');
 const mongoose = require('mongoose');
 const express = require('express');
 const cors = require('cors');
@@ -8,11 +6,15 @@ const cors = require('cors');
 const app = express();
 app.use('/api',express.json());
 app.use('/api',cors());
-
+console.log(process.env.MONGODB_URL)
 mongoose.connect(process.env.MONGODB_URL,{
     useUnifiedTopology: true,
     useNewUrlParser: true
-},() => console.log('mongoose conected!'));
+}).then((data) => {
+    console.log('conectad!');
+}).catch((err) => {
+    console.log(err);
+});
 
 app.get('/api',(req,res) =>{
     res.contentType('text/plain');
@@ -20,7 +22,7 @@ app.get('/api',(req,res) =>{
 })
 module.exports = app;
 // https.createServer(app)
-// .listen(PORT,() => {
-//     console.log(`online! \nlistemport: ${PORT}`);
+// .listen(3000,() => {
+//     console.log(`online! \nlistemport: 3000`);
 // });
 
