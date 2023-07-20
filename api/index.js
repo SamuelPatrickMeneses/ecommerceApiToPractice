@@ -2,24 +2,23 @@
 const mongoose = require('mongoose');
 const express = require('express');
 const cors = require('cors');
+const routes = require('./routes');
 
 const app = express();
 app.use('/api',express.json());
 app.use('/api',cors());
-console.log(process.env.MONGODB_URL)
+
 mongoose.connect(process.env.MONGODB_URL,{
     useUnifiedTopology: true,
     useNewUrlParser: true
 }).then((data) => {
-    console.log('conectad!');
+    console.log(data);
 }).catch((err) => {
-    console.log(err);
+    console.error(err);
 });
 
-app.get('/api',(req,res) =>{
-    res.contentType('text/plain');
-    res.send('hola mundo!');
-})
+app.use('/api',routes);
+
 module.exports = app;
 // https.createServer(app)
 // .listen(3000,() => {
