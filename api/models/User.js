@@ -29,10 +29,8 @@ const User = new Schema({
         }
     },
     payment: {
-        card: {
-            number: String,
-            cvc:  String
-        }
+        card: String,
+        cvc: String
     }
 });
 
