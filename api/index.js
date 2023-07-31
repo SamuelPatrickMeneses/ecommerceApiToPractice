@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
-const routes = require('./routes');
-require('./config/DBConection.js'); 
+const routes = require('../app/routes');
+require('../app/config/DBConection.js'); 
 
 const app = express();
 app.use('/api',express.json());
