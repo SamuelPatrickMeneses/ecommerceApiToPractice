@@ -21,7 +21,7 @@ module.exports = {
             const users = await userRepository.find();
             return users.map(this.userToDTO);
         }catch({name, errors}){
-            throw formatError(name, error);
+            throw formatError(name, errors);
         }
     },
     async crateUser(dto){
@@ -37,17 +37,33 @@ module.exports = {
     async  getUsersById(id){
         try{
             const user = await userRepository.findOne({_id: id});
+            if(!user)
+                throw {name: 'NotFoundError', errors:['user not found']};
             return this.userToDTO(user);
         }catch({name, errors}){
-            throw formatError(name, error);
+            throw formatError(name, errors);
         }
     },
-    async  getUsersByName(name){
+    async  getUsersByName(useName){
         try{
-            const user = await userRepository.findOne({userName: name});
+            const user = await userRepository.findOne({'userName': UserName});
+            if(!user)
+                throw {name: 'NotFoundError', errors:['user not found']};
             return this.userToDTO(user);
         }catch({name, errors}){
-            throw formatError(name, error);
+            throw formatError(name, errors);
+        }
+    },
+    async authentication(userName, pass){
+        try{
+            const user = await userRepository.findOne({'userName': userName});
+            if(!user)
+                throw {errors:['user not found']};
+            if(await bcrypt.compare(pass, user.userPass))
+                return this.userToDTO(user);
+            throw {errors:[]};
+        }catch({errors}){
+            throw formatError('AuthenticationError', errors);
         }
     },
 };
