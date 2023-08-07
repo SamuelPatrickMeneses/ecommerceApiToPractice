@@ -1,10 +1,10 @@
 const userRepository = require('../models/User.js');
-const {isConectade} = require('../config/DBConection.js');
+const dbconection = require('../config/DBConection.js');
 const {bcryptSalt} = require('../config/securityConfig.js');
 const bcrypt = require('bcryptjs');
 function formatError(name, errors){
     return {
-        "name": isConectade ? name : 'DatabaseError',
+        "name": dbconection.isConectade() ? name : 'DatabaseError',
         onPaths: errors ? Object.keys(errors) : undefined
     };
 }
