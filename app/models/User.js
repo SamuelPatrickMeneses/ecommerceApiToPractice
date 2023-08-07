@@ -4,7 +4,13 @@ const {Schema, model} = mongoose;
 const User = new Schema({
     userName:{
         type: String,
-        required:true
+        required:true,
+        unique: true,
+        index: true
+    },
+    userPass:{
+        type: String,
+        required: true
     },
     userCarts:  [{
         type: Schema.Types.ObjectId,
