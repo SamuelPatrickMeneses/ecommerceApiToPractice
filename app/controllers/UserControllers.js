@@ -1,5 +1,5 @@
 const userServise = require('../services/UserServices.js');
-const errHandler = require('../helpers/defaltErrorHandler.js');
+const errHandler = require('../helpers/errorResponse.js');
 function getUsers(req, res){
     userServise.getUsers()
     .then((data) => {
